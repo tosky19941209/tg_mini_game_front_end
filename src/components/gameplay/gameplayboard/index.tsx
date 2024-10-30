@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PlayerBear from "../../../assets/gameBear.svg"
 import Firewall from "../../../assets/firewall.svg"
-
+import FirewallPng from "../../../assets/firewall.png"
 const GamePlayBoard = () => {
     const [playerPosition, setPlayerPosition] = useState<number>(50)
     const [firewallPosition1, setFireWallPosition1] = useState<number>(0)
@@ -10,7 +10,7 @@ const GamePlayBoard = () => {
     const [firewallPosition4, setFireWallPosition4] = useState<number>(-150)
     const [isChangeDirector, setIsChangeDirector] = useState<boolean>(true)
     const [changeNumberDirector, setChangeNumberDirector] = useState<number>(0)
-    const playerStep = 0.2
+    const playerStep = 0.4
     const wallStep = 0.5
 
     useEffect(() => {
@@ -30,21 +30,24 @@ const GamePlayBoard = () => {
     }, [isChangeDirector])
 
     useEffect(() => {
-        if (firewallPosition1 > 120) setFireWallPosition1(-Math.random() * 50)
-        if (firewallPosition2 > 120) setFireWallPosition2(-Math.random() * 50)
-        if (firewallPosition3 > 120) setFireWallPosition3(-Math.random() * 50)
-        if (firewallPosition4 > 120) setFireWallPosition4(-Math.random() * 50)
+        if (firewallPosition1 > 95) setFireWallPosition1(-Math.random() * 70)
+        if (firewallPosition2 > 95) setFireWallPosition2(-Math.random() * 70)
+        if (firewallPosition3 > 95) setFireWallPosition3(-Math.random() * 70)
+        if (firewallPosition4 > 95) setFireWallPosition4(-Math.random() * 70)
+        if (playerPosition > 95) setPlayerPosition(5)
+        if (playerPosition < 5) setPlayerPosition(95)
     },
         [
             firewallPosition1,
             firewallPosition2,
             firewallPosition3,
-            firewallPosition4
+            firewallPosition4,
+            playerPosition
         ]
     )
 
     return (
-        <div className="h-full flex flex flex-col relative overflow-y-auto"
+        <div className="h-full flex flex flex-col relative overflow-y-auto scroll-m-0"
             onClick={() => {
                 setIsChangeDirector(!isChangeDirector)
                 setChangeNumberDirector(prev => prev + 1)
@@ -62,58 +65,48 @@ const GamePlayBoard = () => {
                 />
             </div>
 
-            <div className="w-[160px] h-[28px]"
+            <div className="w-[35vw] h-[20px] bg-cover"
                 style={{
                     position: "absolute",
                     left: "0px",
-                    top: `${firewallPosition1}%`
+                    top: `${firewallPosition1}%`,
+                    backgroundImage: `url(${FirewallPng})`,
+
                 }}
-            >
-                <img
-                    className='w-[100%] h-[100%]'
-                    src={Firewall}
-                />
-            </div>
+            />
 
 
-            <div className="w-[160px] h-[28px]"
+
+
+            <div className="w-[35vw] h-[20px] bg-cover"
                 style={{
                     position: "absolute",
                     right: "0px",
-                    top: `${firewallPosition2}%`
-                }}
-            >
-                <img
-                    className='w-[100%] h-[100%]'
-                    src={Firewall}
-                />
-            </div>
+                    top: `${firewallPosition2}%`,
+                    backgroundImage: `url(${FirewallPng})`,
 
-            <div className="w-[160px] h-[28px]"
+                }}
+            />
+
+            <div className="w-[35vw] h-[20px] bg-cover"
                 style={{
                     position: "absolute",
                     left: "0px",
-                    top: `${firewallPosition3}%`
-                }}
-            >
-                <img
-                    className='w-[100%] h-[100%]'
-                    src={Firewall}
-                />
-            </div>
+                    top: `${firewallPosition3}%`,
+                    backgroundImage: `url(${FirewallPng})`,
 
-            <div className="w-[160px] h-[28px]"
+                }}
+            />
+
+            <div className="w-[35vw] h-[20px] bg-cover"
                 style={{
                     position: "absolute",
                     right: "0px",
-                    top: `${firewallPosition4}%`
+                    top: `${firewallPosition4}%`,
+                    backgroundImage: `url(${FirewallPng})`,
+
                 }}
-            >
-                <img
-                    className='w-[100%] h-[100%]'
-                    src={Firewall}
-                />
-            </div>
+            />
         </div>
     )
 }
