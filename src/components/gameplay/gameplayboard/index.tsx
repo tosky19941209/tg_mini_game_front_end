@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import PlayerBear from "../../../assets/gameBear.svg"
-import Firewall from "../../../assets/firewall.svg"
 import FirewallPng from "../../../assets/firewall.png"
 const GamePlayBoard = () => {
     const [playerPosition, setPlayerPosition] = useState<number>(50)
