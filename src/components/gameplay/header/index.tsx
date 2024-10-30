@@ -3,7 +3,7 @@ import FollowDown from "../../../assets/followdown.svg"
 import Avatar from "../../../assets/avatar.jpg"
 const GameplayHeader = () => {
     return (
-        <div className="h-[89px] m-5 mt-10 border rounded-tl-xl rounded-br-xl border-[#F0B90B] flex justify-center items-center bg-[#29262F]">
+        <div className="h-[89px] mr-2 ml-2 mb-1 mt-1 border rounded-tl-xl rounded-br-xl border-[#F0B90B] flex justify-center items-center bg-[#29262F]">
             <div className="w-full h-[100%] ml-4 flex items-center">
                 <img
                     className="rounded-[50%] w-[59px] h-[59px] bg-red-100  "

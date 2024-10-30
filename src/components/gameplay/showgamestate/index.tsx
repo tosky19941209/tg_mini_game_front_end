@@ -2,13 +2,13 @@ import TokenIcon from "../../../assets/tokenIcon.png"
 import AlertIcon from "../../../assets/alert.svg"
 const ShowGameState = () => {
     return (
-        <div className="h-[100px] flex justify-center items-center gap-2">
+        <div className="h-[65px] flex justify-center items-center gap-2">
             <img
                 src={TokenIcon}
-                className="w-[78px] h-[78px]"
+                className="w-[70px] h-[70px]"
             />
 
-            <p className="text-[32px]">
+            <p className="text-[28px]">
                 92010304.30
             </p>
 

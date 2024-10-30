@@ -1,7 +1,9 @@
 const GamePlayBoard = () => {
     return (
-        <div className="">
+        <div className="h-[25vh]">
+            <div>
 
+            </div>
         </div>
     )
 }
