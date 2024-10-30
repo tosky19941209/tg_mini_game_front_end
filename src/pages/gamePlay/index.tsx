@@ -7,13 +7,17 @@ import GameStartButton from "../../components/gameplay/gameStartButton"
 
 const Dashboard = () => {
     return (
-        <div className="w-full">
-            <GameplayHeader />
-            <TokenBalance />
-            <ShowGameState />
+        <div className="h-[90vh] flex flex-col justify-between">
+            <div>
+                <GameplayHeader />
+                <TokenBalance />
+                <ShowGameState />
+            </div>
             <GamePlayBoard />
-            <GameValueInput />
-            <GameStartButton />
+            <div>
+                <GameValueInput />
+                <GameStartButton />
+            </div>
         </div>
     )
 }

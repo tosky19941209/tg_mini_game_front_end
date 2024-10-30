@@ -33,22 +33,24 @@ const Footer = () => {
         }
     }, [])
     return (
-        <nav className="flex p-5 justify-between items-center">
-            {
-                Sidebar.map((item: string, idx: number) => (
-                    <NavLink
-                        to={Links[idx]}
-                        key={idx}
-                        onClick={() => setSideBarId(idx)}>
-                        <img
-                            src={sideBarId === idx ? HoverSidebar[idx] : item}
-                            alt="Sidebar"
-                        />
-                    </NavLink>
-                ))
-            }
+        <>
+            <nav className="flex h-[10vh] p-2 justify-between items-center">
+                {
+                    Sidebar.map((item: string, idx: number) => (
+                        <NavLink
+                            to={Links[idx]}
+                            key={idx}
+                            onClick={() => setSideBarId(idx)}>
+                            <img
+                                src={sideBarId === idx ? HoverSidebar[idx] : item}
+                                alt="Sidebar"
+                            />
+                        </NavLink>
+                    ))
+                }
 
-        </nav>
+            </nav>
+        </>
     );
 };
 
