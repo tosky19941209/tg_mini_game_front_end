@@ -1,6 +1,14 @@
 import TokenIcon from "../../../assets/tokenIcon.png"
 import AlertIcon from "../../../assets/alert.svg"
-const ShowGameState = () => {
+import { useEffect } from "react"
+
+interface PropsShowGameState {
+    isStart: boolean
+}
+const ShowGameState = ({ isStart }: PropsShowGameState) => {
+    useEffect(() => {
+
+    }, [isStart])
     return (
         <div className="h-[65px] flex justify-center items-center gap-2">
             <img

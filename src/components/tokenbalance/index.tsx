@@ -1,6 +1,13 @@
 import TokenIcon from "../../assets/tokenIcon.png"
 import RocketIcon from "../../assets/rocketIcon.svg"
-const TokenBalance = () => {
+import { useEffect } from "react"
+interface PropsTokenBalance {
+    isStart: boolean
+}
+const TokenBalance = ({ isStart }: PropsTokenBalance) => {
+    useEffect(() => {
+
+    }, [isStart])
     return (
         <div className="mr-5 ml-5 h-[50px] bg-[#151419] rounded-tl-xl rounded-br-xl p-2 flex">
             <div className="w-[50%] h-[100%] bg-[#29262F] rounded-tl-xl rounded-br-xl flex justify-center items-center gap-2">

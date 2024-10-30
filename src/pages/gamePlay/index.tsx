@@ -4,19 +4,21 @@ import ShowGameState from "../../components/gameplay/showgamestate"
 import GamePlayBoard from "../../components/gameplay/gameplayboard"
 import GameValueInput from "../../components/gameplay/gamevalueinput"
 import GameStartButton from "../../components/gameplay/gameStartButton"
+import { useState } from "react"
 
 const Dashboard = () => {
+    const [isStart, setIsStart] = useState<boolean>(false)
     return (
         <div className="h-[90vh] flex flex-col justify-between">
             <div>
-                <GameplayHeader />
-                <TokenBalance />
-                <ShowGameState />
+                <GameplayHeader isStart={isStart} />
+                <TokenBalance isStart={isStart} />
+                <ShowGameState isStart={isStart} />
             </div>
-            <GamePlayBoard />
+            <GamePlayBoard isStart={isStart} setIsStart={setIsStart} />
             <div>
-                <GameValueInput />
-                <GameStartButton />
+                <GameValueInput isStart={isStart} />
+                <GameStartButton onClick={() => setIsStart(!isStart)} isStart={isStart} />
             </div>
         </div>
     )

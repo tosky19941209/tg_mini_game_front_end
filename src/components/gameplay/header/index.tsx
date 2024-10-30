@@ -1,7 +1,14 @@
 import FollowUp from "../../../assets/followup.svg"
 import FollowDown from "../../../assets/followdown.svg"
 import Avatar from "../../../assets/avatar.jpg"
-const GameplayHeader = () => {
+import { useEffect } from "react"
+interface PropsGameplayHeader {
+    isStart: boolean
+}
+const GameplayHeader = ({ isStart }: PropsGameplayHeader) => {
+    useEffect(() => {
+
+    }, [isStart])
     return (
         <div className="h-[89px] mr-2 ml-2 mb-1 mt-1 border rounded-tl-xl rounded-br-xl border-[#F0B90B] flex justify-center items-center bg-[#29262F]">
             <div className="w-full h-[100%] ml-4 flex items-center">

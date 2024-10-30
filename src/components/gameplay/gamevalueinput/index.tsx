@@ -1,4 +1,15 @@
-const GameValueInput = () => {
+import { useEffect } from "react"
+
+interface PropsGameValueInput {
+    isStart: boolean
+}
+
+const GameValueInput = ({ isStart }: PropsGameValueInput) => {
+
+    useEffect(() => {
+
+    }, [isStart])
+
     return (
         <div className=" flex p-2 gap-2">
             <div className="w-[50%] flex flex-col items-start">

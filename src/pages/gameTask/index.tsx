@@ -3,7 +3,7 @@ import TokenBalance from "../../components/tokenbalance"
 const GameTask = () => {
     return (
         <div className="w-full">
-            <TokenBalance />
+            <TokenBalance isStart={false} />
             <TaskList />
         </div>
     )

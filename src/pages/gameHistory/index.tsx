@@ -5,7 +5,7 @@ import HistoryList from "../../components/gameHistory/historyList"
 const GameHistory = () => {
     return (
         <div className="w-full">
-            <TokenBalance />
+            <TokenBalance isStart={false} />
             <HistoryTitle />
             <HistoryList />
         </div>
