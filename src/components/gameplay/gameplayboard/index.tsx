@@ -27,21 +27,17 @@ const GamePlayBoard = ({ isStart, setIsStart }: PropsGamePlayBoard) => {
     const playerStep = 0.4
     const wallStep = 0.5
 
-    useEffect(() => {
-        if (isStart === true)
-            if (changeNumberDirector != 0) {
-                const interval = setInterval(() => {
-                    setFireWallPosition1(prev => prev + wallStep)
-                    setFireWallPosition2(prev => prev + wallStep)
-                    setFireWallPosition3(prev => prev + wallStep)
-                    setFireWallPosition4(prev => prev + wallStep)
-                    if (isChangeDirector === true)
-                        setPlayerPositionX(prev => prev + playerStep)
-                    else setPlayerPositionX(prev => prev - playerStep)
-                }, 10)
-                return () => clearInterval(interval)
-            }
-    }, [isChangeDirector, isStart])
+
+    const PlayingGame = () => {
+        setFireWallPosition1(prev => prev + wallStep)
+        setFireWallPosition2(prev => prev + wallStep)
+        setFireWallPosition3(prev => prev + wallStep)
+        setFireWallPosition4(prev => prev + wallStep)
+        if (isChangeDirector === true)
+            setPlayerPositionX(prev => prev + playerStep)
+        else setPlayerPositionX(prev => prev - playerStep)
+    }
+
 
     const IsCrash = () => {
         const y_rate = 95
@@ -119,7 +115,19 @@ const GamePlayBoard = ({ isStart, setIsStart }: PropsGamePlayBoard) => {
             }
         }
     }
+//Playing Game while Player is not died.
+    useEffect(() => {
+        if (isStart === true)
+            if (changeNumberDirector != 0) {
+                const interval = setInterval(() => {
+                    PlayingGame()
+                }, 10)
+                return () => clearInterval(interval)
+            }
+    }, [isChangeDirector, isStart])
 
+
+//When player is died, firewall is formatted
     useEffect(() => {
         IsCrash()
         if (firewallPosition1 > 90) setFireWallPosition1(-Math.random() * 70)
@@ -138,6 +146,8 @@ const GamePlayBoard = ({ isStart, setIsStart }: PropsGamePlayBoard) => {
         ]
     )
 
+
+//When start btn is pushed, the Game will get started
     useEffect(() => {
         if (isStart === true) {
             setIsChangeDirector(!isChangeDirector)
@@ -146,6 +156,8 @@ const GamePlayBoard = ({ isStart, setIsStart }: PropsGamePlayBoard) => {
         }
     }, [isStart])
 
+
+//When player is crashed with Firewall, the crashing animation will be done.
     useEffect(() => {
         if (!isCrashed) return
         let t: number = 0
