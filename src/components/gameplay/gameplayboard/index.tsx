@@ -40,8 +40,8 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
 
 
     const PlayingGame = () => {
-        // const levelSpeed = 0.7
-        const levelSpeed = 2
+        const levelSpeed = 0.7
+        // const levelSpeed = 2
         setFireWallPosition1(prev => prev + wallStep)
         setFireWallPosition2(prev => prev + wallStep)
         setFireWallPosition3(prev => prev + wallStep)
