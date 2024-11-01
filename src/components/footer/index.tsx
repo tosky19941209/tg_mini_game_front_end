@@ -24,6 +24,7 @@ const Footer = () => {
 
     ]
     const [sideBarId, setSideBarId] = useState<number>(0)
+    const [number, setNumber] = useState<number>(0)
 
     useEffect(() => {
         const pathname = window.location.pathname;
@@ -31,7 +32,16 @@ const Footer = () => {
             if (Links[i] === pathname)
                 setSideBarId(i)
         }
+    }, [number])
+
+    useEffect(() => {
+        console.log("Start")
     }, [])
+    
+    useEffect(() => {
+        console.log(sideBarId)
+    }, [sideBarId])
+
     return (
         <>
             <nav className="flex h-[10vh] p-2 justify-between items-center">
@@ -40,7 +50,10 @@ const Footer = () => {
                         <NavLink
                             to={Links[idx]}
                             key={idx}
-                            onClick={() => setSideBarId(idx)}>
+                            onClick={() => {
+                                setSideBarId(idx)
+                                setNumber(prev => prev + 1)
+                            }}>
                             <img
                                 src={sideBarId === idx ? HoverSidebar[idx] : item}
                                 alt="Sidebar"
