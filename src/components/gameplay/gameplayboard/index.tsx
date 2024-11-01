@@ -6,7 +6,7 @@ import CompletedImg from "../../../assets/Amazing!.png"
 import { FreeTokenAPI } from '../../../service';
 import { useUtilContext } from '../../../hooks';
 import { showToast } from '../../../helper';
-
+import "./index.css"
 interface PropsGamePlayBoard {
     isStart: boolean,
     setIsStart: (id: boolean) => void;
@@ -164,7 +164,7 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
         if (firewallPosition4 > 90) setFireWallPosition4(-Math.random() * 70)
         if (playerPosition_x > 95) setPlayerPositionX(5)
         if (playerPosition_x < 5) setPlayerPositionX(95)
-        if (levelPosition > 100) {
+        if (levelPosition > 90) {
             setLevelPosition(0)
             setLevel(prev => prev + 0.1)
         }
@@ -285,7 +285,7 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
     }, [isFinished])
 
     return (
-        <div className="h-full flex flex flex-col relative overflow-y-auto"
+        <div className="h-full flex flex flex-col relative overflow-y-auto hide-scrollbar"
             ref={gameBoardRef}
             onClick={() => {
                 if (isStart === true) {
