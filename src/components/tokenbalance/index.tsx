@@ -1,10 +1,12 @@
 import TokenIcon from "../../assets/tokenIcon.png"
 import RocketIcon from "../../assets/rocketIcon.svg"
 import { useEffect } from "react"
+import { useUtilContext } from "../../hooks"
 interface PropsTokenBalance {
     isStart: boolean
 }
 const TokenBalance = ({ isStart }: PropsTokenBalance) => {
+    const { freetokenBalance } = useUtilContext()
     useEffect(() => {
 
     }, [isStart])
@@ -17,7 +19,7 @@ const TokenBalance = ({ isStart }: PropsTokenBalance) => {
                     alt="TokenIcon"
                 />
                 <p className="text-[14px]">
-                    92010304.30
+                    {freetokenBalance}
                 </p>
             </div>
 

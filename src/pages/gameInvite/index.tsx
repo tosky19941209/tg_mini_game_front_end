@@ -2,7 +2,10 @@
 import InviteImage from "../../assets/inviteFriend.svg"
 import RealTokenIcon from "../../assets/tokenIcon.png"
 import RocketIcon from "../../assets/rocketIcon.svg"
+import { useUtilContext } from "../../hooks"
 const GameInvite = () => {
+    const { freetokenBalance } = useUtilContext()
+
     return (
         <div className="w-full">
             <div className="flex flex-col justify-center items-center">
@@ -24,7 +27,7 @@ const GameInvite = () => {
                             className="w-[34px] h-[34px]"
                             src={RealTokenIcon}
                         />
-                        <p>+0</p>
+                        <p>+{freetokenBalance}</p>
                     </div>
 
                     <div className="w-full flex justify-center items-center gap-1">

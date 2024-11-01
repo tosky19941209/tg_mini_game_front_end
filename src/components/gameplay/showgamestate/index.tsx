@@ -1,11 +1,13 @@
 import TokenIcon from "../../../assets/tokenIcon.png"
 import AlertIcon from "../../../assets/alert.svg"
 import { useEffect } from "react"
+import { useUtilContext } from "../../../hooks"
 
 interface PropsShowGameState {
     isStart: boolean
 }
 const ShowGameState = ({ isStart }: PropsShowGameState) => {
+    const { freetokenBalance } = useUtilContext()
     useEffect(() => {
 
     }, [isStart])
@@ -17,7 +19,7 @@ const ShowGameState = ({ isStart }: PropsShowGameState) => {
             />
 
             <p className="text-[28px]">
-                92010304.30
+                {freetokenBalance}
             </p>
 
             <div className="w-[34px] h-[34px] bg-[#151419] flex justify-center items-center rounded-sm">

@@ -5,9 +5,13 @@ import GamePlayBoard from "../../components/gameplay/gameplayboard"
 import GameValueInput from "../../components/gameplay/gamevalueinput"
 import GameStartButton from "../../components/gameplay/gameStartButton"
 import { useState } from "react"
+import { showToast } from "../../helper"
 
 const Dashboard = () => {
     const [isStart, setIsStart] = useState<boolean>(false)
+    const [bet, setBet] = useState<number>(10)
+    const [autoStop, setAutoStop] = useState<number>(1.1)
+
     return (
         <div className="h-[90vh] flex flex-col justify-between">
             <div>
@@ -15,10 +19,28 @@ const Dashboard = () => {
                 <TokenBalance isStart={isStart} />
                 <ShowGameState isStart={isStart} />
             </div>
-            <GamePlayBoard isStart={isStart} setIsStart={setIsStart} />
+            <GamePlayBoard
+                isStart={isStart}
+                setIsStart={setIsStart}
+                bet={bet}
+                autoStop={autoStop}
+            />
             <div>
-                <GameValueInput isStart={isStart} />
-                <GameStartButton onClick={() => setIsStart(!isStart)} isStart={isStart} />
+                <GameValueInput
+                    isStart={isStart}
+                    bet={bet}
+                    autoStop={autoStop}
+                    setBet={setBet}
+                    setAutoStop={setAutoStop}
+                />
+                <GameStartButton
+                    onClick={() => {
+                        if (autoStop < 1.1) {
+                            showToast("warning", "Autostop value should be 1.1 at least")
+                        }
+                        else setIsStart(!isStart)
+                    }}
+                    isStart={isStart} />
             </div>
         </div>
     )

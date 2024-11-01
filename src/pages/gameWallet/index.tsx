@@ -1,7 +1,26 @@
 import TokenBackIcon from "../../assets/tokenBack.svg"
 import WalletIcon from "../../assets/walletIcon.svg"
+import { useTonAddress, useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 
 const GameWallet = () => {
+    const [tonconnectUi] = useTonConnectUI();
+    let wallet = useTonAddress();
+    const tonwallet = useTonWallet();
+
+    const disconnectFunction = async () => {
+        console.log(tonwallet)
+        await tonconnectUi.disconnect();
+    }
+
+    const tonWalletAction = () => {
+        if (!wallet) {
+            tonconnectUi.openModal()
+        }
+        else {
+            disconnectFunction()
+        }
+    }
+
     return (
         <div className="w-full">
             <div className="flex flex-col justify-center items-center">
@@ -26,7 +45,8 @@ const GameWallet = () => {
                     <p>Not Connected</p>
                 </div>
 
-                <div className="bg-[#FCE069] h-[44px] mt-3 flex justify-center items-center rounded-tl-xl rounded-br-xl cursor-pointer text-[16px] text-[black] font-bold">
+                <div className="bg-[#FCE069] h-[44px] mt-3 flex justify-center items-center rounded-tl-xl rounded-br-xl cursor-pointer text-[16px] text-[black] font-bold"
+                    onClick={() => tonWalletAction()}>
                     Connect Wallet
                 </div>
             </div>
