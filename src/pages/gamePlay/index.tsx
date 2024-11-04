@@ -6,8 +6,10 @@ import GameValueInput from "../../components/gameplay/gamevalueinput"
 import GameStartButton from "../../components/gameplay/gameStartButton"
 import { useState } from "react"
 import { showToast } from "../../helper"
+import { useUtilContext } from "../../hooks"
 
 const Dashboard = () => {
+    const { freetokenBalance } = useUtilContext()
     const [isStart, setIsStart] = useState<boolean>(false)
     const [bet, setBet] = useState<number>(10)
     const [autoStop, setAutoStop] = useState<number>(1.1)
@@ -38,6 +40,7 @@ const Dashboard = () => {
                         if (autoStop < 1.1) {
                             showToast("warning", "Autostop value should be 1.1 at least")
                         }
+                        else if (freetokenBalance < 10) showToast("warning", "Lack of Token!")
                         else setIsStart(!isStart)
                     }}
                     isStart={isStart} />

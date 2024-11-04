@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TokenBackIcon from "../../assets/tokenBack.svg"
 import WalletIcon from "../../assets/walletIcon.svg"
 import { useTonAddress, useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
@@ -6,6 +7,8 @@ const GameWallet = () => {
     const [tonconnectUi] = useTonConnectUI();
     let wallet = useTonAddress();
     const tonwallet = useTonWallet();
+
+    const [tokenAmountForBuy, setTokenAmountForBuy] = useState<number>(1000)
 
     const disconnectFunction = async () => {
         console.log(tonwallet)
@@ -42,12 +45,35 @@ const GameWallet = () => {
                         className="w-[20px] h-[20px]"
                         alt="WalletConnnect"
                     />
-                    <p>Not Connected</p>
+                    <p>{
+                        wallet ? `${wallet.slice(0, 6)}...${wallet.slice(-6)}` : 'Not Connected'
+                    }</p>
                 </div>
 
-                <div className="bg-[#FCE069] h-[44px] mt-3 flex justify-center items-center rounded-tl-xl rounded-br-xl cursor-pointer text-[16px] text-[black] font-bold"
+                {
+                    wallet && <>
+                        <p className="text-[white] text-left mt-5">
+                            Buy Coins
+                        </p>
+                        <input
+                            type="number"
+                            className="bg-[white] text-[black] h-[44px] w-full mt-3 flex justify-start items-center gap-3 pl-5 rounded-tl-xl rounded-br-xl"
+                            value={tokenAmountForBuy}
+                            onChange={(e) => setTokenAmountForBuy(Number(e.target.value))}
+                        />
+                        <p className="text-[white] text-left mt-1">1TON = 1000 Coins</p>
+                        <div className={`bg-[#FCE069] h-[44px] mt-3 mb-6 flex justify-center items-center rounded-tl-xl rounded-br-xl cursor-pointer text-[16px] text-[black] font-bold`}
+                            onClick={() => { }}>
+                            Buy
+                        </div>
+                    </>
+                }
+
+                <div className={`${wallet ? "bg-red-400" : "bg-[#FCE069]"} h-[44px] mt-3 flex justify-center items-center rounded-tl-xl rounded-br-xl cursor-pointer text-[16px] text-[black] font-bold`}
                     onClick={() => tonWalletAction()}>
-                    Connect Wallet
+                    {
+                        wallet ? "Disconnect Wallet" : "Connect Wallet"
+                    }
                 </div>
             </div>
         </div>
