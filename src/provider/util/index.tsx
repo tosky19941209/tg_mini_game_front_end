@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react"
 import UtilContext from "../../contexts"
 import { FreeTokenAPI, UserAPI } from "../../service"
-// import { tg_token } from "../../constant"
+import { tg_token } from "../../constant"
 
 const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [sidebarNumber, setSidebarNumber] = useState<number>(0)
@@ -11,6 +11,19 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [freetokenBalance, setFreeTokenBalance] = useState<number>(0)
     const [todayClaimAmount, setTodayClaimAmount] = useState<number>(0)
     const [isDailyClaimed, setIsDailyClaimed] = useState<boolean>(false)
+
+    const getProfileAvatar = async (userId: any, bot_token: any) => {
+        const profilesResponse = await fetch(`https://api.telegram.org/bot${bot_token}/getUserProfilePhotos?user_id=${userId}`);
+        const profiles = await profilesResponse.json();
+
+        if (profiles.result.photos.length > 0) {
+            const fileResponse = await fetch(`https://api.telegram.org/bot${bot_token}/getFile?file_id=${profiles.result.photos[0][2].file_id}`);
+            const filePath = await fileResponse.json();
+
+            const userAvatarUrl = `https://api.telegram.org/file/bot${bot_token}/${filePath.result.file_path}`;
+            return userAvatarUrl;
+        }
+    }
 
     const getTelegramUserName = async () => {
         const webapp = window.Telegram?.WebApp.initDataUnsafe;
@@ -38,6 +51,7 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
             console.log("realName =>", realName)
             console.log("userName =>", userName)
             console.log("userID =>", userId)
+            console.log("avatarUrl =>", getProfileAvatar(userId, tg_token))
             await UserAPI.post("/setuser", { user: userName, tgUserId: userId, realName: realName })
             await setUser(userName)
             await setTgUserId(userId)
