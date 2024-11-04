@@ -1,7 +1,7 @@
 export type UtilContextType = {
     sidebarNumber: number,
     setSidebarNumber: (id: number) => void;
-    user: string,
+    user: string | undefined,
     setUser: (id: string) => void;
     refresh: string,
     setRefresh: (id: string) => void;
@@ -11,4 +11,7 @@ export type UtilContextType = {
     setTodayClaimAmount: (id: number) => void;
     isDailyClaimed: boolean,
     setIsDailyClaimed: (id: boolean) => void;
+    tgUserId: number | undefined;
+    setTgUserId: (id: number) => void;
+
 }

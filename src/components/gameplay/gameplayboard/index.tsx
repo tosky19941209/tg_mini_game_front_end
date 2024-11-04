@@ -14,7 +14,7 @@ interface PropsGamePlayBoard {
     autoStop: number;
 }
 const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoard) => {
-    const { user, setFreeTokenBalance } = useUtilContext()
+    const { setFreeTokenBalance, tgUserId } = useUtilContext()
     const gameBoardRef = useRef<HTMLDivElement | null>(null)
     const playerRef = useRef<HTMLDivElement | null>(null);
     const wallRef_1 = useRef<HTMLDivElement | null>(null);
@@ -185,7 +185,7 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
             try {
                 await FreeTokenAPI.post('/getTokenByGame',
                     {
-                        user: user,
+                        tgUserId: tgUserId,
                         balance: -bet,
                         bet: bet,
                         autoStop: autoStop,
@@ -193,7 +193,7 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
                     }
                 )
 
-                const tokenBalanceData = await FreeTokenAPI.post('/currentBalance', { user })
+                const tokenBalanceData = await FreeTokenAPI.post('/currentBalance', { tgUserId })
                 setFreeTokenBalance(tokenBalanceData.data.message)
                 setIsChangeDirector(!isChangeDirector)
                 setChangeNumberDirector(prev => prev + 1)
@@ -239,7 +239,7 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
 
                 await FreeTokenAPI.post('/getTokenByGame',
                     {
-                        user: user,
+                        tgUserId: tgUserId,
                         balance: 0,
                         bet: bet,
                         stopcrash: 0,
@@ -247,7 +247,7 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
                     }
                 )
 
-                const tokenBalanceData = await FreeTokenAPI.post('/currentBalance', { user })
+                const tokenBalanceData = await FreeTokenAPI.post('/currentBalance', { tgUserId })
                 setFreeTokenBalance(tokenBalanceData.data.message)
             }
         }, 7)
@@ -271,14 +271,14 @@ const GamePlayBoard = ({ isStart, setIsStart, bet, autoStop }: PropsGamePlayBoar
 
             await FreeTokenAPI.post('/getTokenByGame',
                 {
-                    user: user,
+                    tgUserId: tgUserId,
                     balance: autoStop * bet,
                     bet: bet,
                     stopcrash: (autoStop - 1),
                     profit: (autoStop - 1) * bet,
                 })
 
-            const tokenBalanceData = await FreeTokenAPI.post('/currentBalance', { user })
+            const tokenBalanceData = await FreeTokenAPI.post('/currentBalance', { tgUserId })
             setFreeTokenBalance(tokenBalanceData.data.message)
         }
         CompletedGame()

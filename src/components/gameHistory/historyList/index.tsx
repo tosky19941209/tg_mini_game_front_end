@@ -29,12 +29,12 @@ const HistoryComponent = ({ bet, profit, stopcrash }: PropsHistory) => {
 
 const HistoryList = () => {
 
-    const { user } = useUtilContext()
+    const { tgUserId } = useUtilContext()
     const [histories, setHistory] = useState<any>([])
 
     useEffect(() => {
         const getHistory = async () => {
-            const historyData = await GameHistoryAPI.post('/getGameHistory', { user })
+            const historyData = await GameHistoryAPI.post('/getGameHistory', { tgUserId })
             setHistory(historyData.data.message)
         }
         getHistory()

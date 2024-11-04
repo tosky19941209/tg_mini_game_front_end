@@ -46,12 +46,13 @@ const TaskComponent = ({ isCompleted }: PropsTaskComponent) => {
 }
 
 const DailyTaskComponent = () => {
-    const { user, todayClaimAmount, isDailyClaimed } = useUtilContext()
+    const { tgUserId, todayClaimAmount, isDailyClaimed } = useUtilContext()
 
 
     const getDailyClaim = async () => {
         try {
-            const requestClaim = await FreeTokenAPI.post('/getDailyClaim', { user: user, balance: todayClaimAmount })
+
+            const requestClaim = await FreeTokenAPI.post('/getDailyClaim', { tgUserId: tgUserId, balance: todayClaimAmount })
             if (requestClaim.data.message === true) showToast("success", `Today you got ${todayClaimAmount} Coins!`)
             else showToast("warning", "You can obtain coins every 24 hours")
         } catch (err) {
