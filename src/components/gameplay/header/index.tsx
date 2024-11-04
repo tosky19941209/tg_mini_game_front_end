@@ -2,10 +2,12 @@ import FollowUp from "../../../assets/followup.svg"
 import FollowDown from "../../../assets/followdown.svg"
 import Avatar from "../../../assets/avatar.jpg"
 import { useEffect } from "react"
+import { useUtilContext } from "../../../hooks"
 interface PropsGameplayHeader {
     isStart: boolean
 }
 const GameplayHeader = ({ isStart }: PropsGameplayHeader) => {
+    const { realName } = useUtilContext()
     useEffect(() => {
 
     }, [isStart])
@@ -19,7 +21,7 @@ const GameplayHeader = ({ isStart }: PropsGameplayHeader) => {
                 />
                 <div className="flex ml-3 flex-col justify-center">
                     <p className="text-left font-bold text-[12px]">
-                        My Name
+                        {realName}
                     </p>
                     <p className="text-left font-bold text-[12px]">
                         God of Space

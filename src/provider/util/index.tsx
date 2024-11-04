@@ -5,7 +5,8 @@ import { tg_token } from "../../constant"
 
 const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [sidebarNumber, setSidebarNumber] = useState<number>(0)
-    const [user, setUser] = useState<string | undefined>("goldhorse")
+    const [user, setUser] = useState<string | undefined>("")
+    const [realName, setrealName] = useState<string>("")
     const [tgUserId, setTgUserId] = useState<number | undefined>(0)
     const [refresh, setRefresh] = useState<string>("")
     const [freetokenBalance, setFreeTokenBalance] = useState<number>(0)
@@ -55,7 +56,7 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
             await UserAPI.post("/setuser", { user: userName, tgUserId: userId, realName: realName, avatarUrl: avatarUrl })
             await setUser(userName)
             await setTgUserId(userId)
-
+            await setrealName(realName)
             console.log("Authentication!")
         } else {
 
@@ -103,7 +104,8 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isDailyClaimed: isDailyClaimed,
         setIsDailyClaimed: setIsDailyClaimed,
         setTgUserId: setTgUserId,
-        tgUserId: tgUserId
+        tgUserId: tgUserId,
+        realName: realName
     }), [
         sidebarNumber,
         setSidebarNumber,
@@ -118,7 +120,8 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isDailyClaimed,
         setIsDailyClaimed,
         tgUserId,
-        setTgUserId
+        setTgUserId,
+        realName
     ])
 
     useEffect(() => {

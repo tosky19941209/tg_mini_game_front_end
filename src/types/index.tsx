@@ -13,5 +13,6 @@ export type UtilContextType = {
     setIsDailyClaimed: (id: boolean) => void;
     tgUserId: number | undefined;
     setTgUserId: (id: number) => void;
+    realName: string;
 
 }
