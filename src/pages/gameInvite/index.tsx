@@ -44,7 +44,7 @@ const GameInvite = () => {
 
     useEffect(() => {
         const getFriendlist = async () => {
-            const _friendList = await FriendsAPI.post('/getFriendlist', { tgUserId: 7146598976 })
+            const _friendList = await FriendsAPI.post('/getFriendlist', { tgUserId: tgUserId })
             const friendList = _friendList.data.message
             console.log(friendList)
             setFriendList(friendList)
