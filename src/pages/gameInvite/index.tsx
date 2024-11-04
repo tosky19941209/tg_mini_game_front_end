@@ -6,6 +6,7 @@ import { initUtils } from '@telegram-apps/sdk'
 import { tg_inviteName } from "../../constant"
 import { useEffect, useState } from "react"
 import { FriendsAPI } from "../../service"
+import CoinImg from "../../assets/coin-y.svg"
 const FriendListComponent = (props: any) => {
     return (
         <div className="h-[70px] ml-5 mr-5 flex justify-between items-center pr-3 pl-3">
@@ -19,9 +20,19 @@ const FriendListComponent = (props: any) => {
                     {props.realName}
                 </p>
             </div>
-            <p>
-                {props.balance}
-            </p>
+            <div className="flex items-center gap-3">
+                <img
+                    className="w-[30px] h-[30px]"
+                    src={CoinImg}
+                    alt="coin"
+                />
+                <div>
+                    <p className="text-right">+25</p>
+                    <p className="text-right opacity-70">
+                        {props.balance}
+                    </p>
+                </div>
+            </div>
         </div>
     )
 }
