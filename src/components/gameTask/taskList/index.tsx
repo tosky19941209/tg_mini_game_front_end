@@ -46,7 +46,7 @@ const TaskComponent = ({ isCompleted }: PropsTaskComponent) => {
 }
 
 const DailyTaskComponent = () => {
-    const { tgUserId, todayClaimAmount, isDailyClaimed, setFreeTokenBalance } = useUtilContext()
+    const { tgUserId, todayClaimAmount, isDailyClaimed, setFreeTokenBalance, setIsDailyClaimed } = useUtilContext()
 
 
     const getDailyClaim = async () => {
@@ -57,7 +57,9 @@ const DailyTaskComponent = () => {
                 showToast("success", `Today you got ${todayClaimAmount} Coins!`)
                 const tokenBalanceData = await FreeTokenAPI.post('/currentBalance', { tgUserId })
                 const tokenBalance = tokenBalanceData.data.message
-                setFreeTokenBalance(tokenBalance)
+                const isClaimAvailable = await FreeTokenAPI.post("/isDailyClaim", { tgUserId })
+                await setIsDailyClaimed(isClaimAvailable.data.message)
+                await setFreeTokenBalance(tokenBalance)
             }
 
             else showToast("warning", "You can obtain coins every 24 hours")
