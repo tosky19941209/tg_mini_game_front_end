@@ -47,12 +47,12 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const realName = webapp["user"]["first_name"] + lastName;
             const userName = webapp["user"]["username"];
             const userId = webapp["user"]["id"];
+            const avatarUrl = await getProfileAvatar(userId, tg_token)
             console.log("lastName =>", lastName)
             console.log("realName =>", realName)
             console.log("userName =>", userName)
             console.log("userID =>", userId)
-            console.log("avatarUrl =>", getProfileAvatar(userId, tg_token))
-            await UserAPI.post("/setuser", { user: userName, tgUserId: userId, realName: realName })
+            await UserAPI.post("/setuser", { user: userName, tgUserId: userId, realName: realName, avatarUrl: avatarUrl })
             await setUser(userName)
             await setTgUserId(userId)
 
