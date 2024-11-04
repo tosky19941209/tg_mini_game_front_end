@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // const domain = "http://localhost:8080/api"
-const domain = "http://198.12.101.190:8080/api"
+const domain = "https://198.12.101.190:8080/api"
 
 export const UserAPI = axios.create({
     baseURL: `${domain}/users`
