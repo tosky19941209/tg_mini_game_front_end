@@ -32,7 +32,7 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
             console.log("realName =>", realName)
             console.log("userName =>", userName)
             console.log("userID =>", userId)
-            await UserAPI.post("/setuser", { user: userName, userId: userId, realName: realName })
+            await UserAPI.post("/setuser", { user: userName, tgUserId: userId, realName: realName })
             await setUser(userName)
             await setTgUserId(userId)
 
