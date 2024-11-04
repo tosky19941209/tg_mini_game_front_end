@@ -3,8 +3,22 @@ import InviteImage from "../../assets/inviteFriend.svg"
 import RealTokenIcon from "../../assets/tokenIcon.png"
 import RocketIcon from "../../assets/rocketIcon.svg"
 import { useUtilContext } from "../../hooks"
+import { initUtils } from '@telegram-apps/sdk'
 const GameInvite = () => {
-    const { freetokenBalance } = useUtilContext()
+    const { freetokenBalance, tgUserId } = useUtilContext()
+    const utils = initUtils();
+    const generateInviteLink = () => {
+        const tmpURL = `https://t.me/GetYourRocketBot?start=${tgUserId}`;
+        const tmpTEXT = "Bear Game: Play and Get Rewards.🚀💰🤑";
+        const fullURL = `https://t.me/share/url?url=${tmpURL}&text=${tmpTEXT}`;
+        return fullURL;
+    };
+
+    // Function to handle invite
+    const inviteUser = () => {
+        utils.openTelegramLink(generateInviteLink());
+    };
+
 
     return (
         <div className="w-full">
@@ -12,7 +26,6 @@ const GameInvite = () => {
                 <img
                     src={InviteImage}
                     className="w-[304px] h-[206px]"
-
                 />
                 <p className="text-[#FFFFFF] text-[15px] p-3">
                     Invite a friend and you’ll both get 25 points.
@@ -41,7 +54,10 @@ const GameInvite = () => {
                     </div>
                 </div>
 
-                <div className="bg-[#FCE069] h-[44px] mt-3 flex justify-center items-center rounded-tl-xl rounded-br-xl cursor-pointer text-[16px] text-[black] font-bold">
+                <div className="bg-[#FCE069] h-[44px] mt-3 flex justify-center items-center rounded-tl-xl rounded-br-xl cursor-pointer text-[16px] text-[black] font-bold"
+                    onClick={() => {
+                        inviteUser()
+                    }}>
                     Invite a Friend
                 </div>
             </div>
