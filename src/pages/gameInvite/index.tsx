@@ -4,11 +4,12 @@ import RealTokenIcon from "../../assets/tokenIcon.png"
 import RocketIcon from "../../assets/rocketIcon.svg"
 import { useUtilContext } from "../../hooks"
 import { initUtils } from '@telegram-apps/sdk'
+import { tg_inviteName } from "../../constant"
 const GameInvite = () => {
     const { freetokenBalance, tgUserId } = useUtilContext()
     const utils = initUtils();
     const generateInviteLink = () => {
-        const tmpURL = `https://t.me/GetYourRocketBot?start=${tgUserId}`;
+        const tmpURL = `https://t.me/${tg_inviteName}?start=${tgUserId}`;
         const tmpTEXT = "Bear Game: Play and Get Rewards.🚀💰🤑";
         const fullURL = `https://t.me/share/url?url=${tmpURL}&text=${tmpTEXT}`;
         return fullURL;
