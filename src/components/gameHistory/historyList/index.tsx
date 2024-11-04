@@ -42,7 +42,7 @@ const HistoryList = () => {
 
     return (
         <div className="flex flex-col gap-3 h-[60vh] focus:scroll-auto scroll-smooth hover:scroll-m-0  scroll-m-8 overflow-y-auto">
-            {
+            {histories.length > 0 &&
                 histories.map((item: any, idx: number) => (
                     <HistoryComponent
                         bet={item.bet}

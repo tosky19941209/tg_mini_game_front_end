@@ -34,14 +34,6 @@ const Footer = () => {
         }
     }, [number])
 
-    useEffect(() => {
-        console.log("Start")
-    }, [])
-    
-    useEffect(() => {
-        console.log(sideBarId)
-    }, [sideBarId])
-
     return (
         <>
             <nav className="flex h-[10vh] p-2 justify-between items-center">

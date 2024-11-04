@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react"
 import UtilContext from "../../contexts"
-import { FreeTokenAPI } from "../../service"
+import { FreeTokenAPI, UserAPI } from "../../service"
 // import { tg_token } from "../../constant"
 
 const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -11,26 +11,25 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [todayClaimAmount, setTodayClaimAmount] = useState<number>(0)
     const [isDailyClaimed, setIsDailyClaimed] = useState<boolean>(false)
 
-    const getTelegramUserName = () => {
-        console.log("Getting UserName")
-        const webapp = window.Telegram?.WebApp.initDataUnsafe;
-        // const bot_token = tg_token
-        if (webapp) {
-            console.log("Tg loading")
-            const lastName = webapp["user"]["last_name"] && (" " + webapp["user"]["last_name"]);
-            const realName = webapp["user"]["first_name"] + lastName;
-            const userName = webapp["user"]["username"];
-            const userId = webapp["user"]["id"];
-            // const userId = 6977492118;
-            // const realName = "aaa";
-            // const userName = "fff";
-            // const historySize = 100;
-            console.log("lastName =>", lastName)
-            console.log("realName =>", realName)
-            console.log("userName =>", userName)
-            console.log("userID =>", userId)
-        } else {
-            console.log("not TG=>", webapp)
+    const getTelegramUserName = async () => {
+        try {
+            const webapp = window.Telegram?.WebApp.initDataUnsafe;
+            // const bot_token = tg_token
+            if (webapp) {
+                const lastName = webapp["user"]["last_name"] && (" " + webapp["user"]["last_name"]);
+                const realName = webapp["user"]["first_name"] + lastName;
+                const userName = webapp["user"]["username"];
+                const userId = webapp["user"]["id"];
+                console.log("lastName =>", lastName)
+                console.log("realName =>", realName)
+                console.log("userName =>", userName)
+                console.log("userID =>", userId)
+                await UserAPI.post("/setuser", { user: userName, userId: userId })
+                console.log("Authentication!")
+            } else {
+            }
+        } catch (err) {
+            console.log("not TG")
         }
     }
 
