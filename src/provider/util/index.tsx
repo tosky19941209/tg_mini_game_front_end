@@ -16,6 +16,7 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const webapp = window.Telegram?.WebApp.initDataUnsafe;
         // const bot_token = tg_token
         if (webapp) {
+            console.log("Tg loading")
             const lastName = webapp["user"]["last_name"] && (" " + webapp["user"]["last_name"]);
             const realName = webapp["user"]["first_name"] + lastName;
             const userName = webapp["user"]["username"];
@@ -28,6 +29,8 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
             console.log("realName =>", realName)
             console.log("userName =>", userName)
             console.log("userID =>", userId)
+        } else {
+            console.log("not TG=>", webapp)
         }
     }
 
