@@ -23,6 +23,12 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // await setUser("goldhorse")
         // await setTgUserId(_userId)
 
+
+        // Get the inviter's ID from the link
+        const urlParams = new URLSearchParams(window.location.search);
+        const inviterUserId = urlParams.get('start');
+        console.log("inivited from =>", inviterUserId)
+
         if (webapp) {
             const lastName = webapp["user"]["last_name"] && (" " + webapp["user"]["last_name"]);
             const realName = webapp["user"]["first_name"] + lastName;
