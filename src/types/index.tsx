@@ -14,5 +14,6 @@ export type UtilContextType = {
     tgUserId: number | undefined;
     setTgUserId: (id: number) => void;
     realName: string;
+    avatarUrl: string | undefined
 
 }

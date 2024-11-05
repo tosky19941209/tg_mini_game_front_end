@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react"
 import UtilContext from "../../contexts"
 import { FreeTokenAPI, UserAPI } from "../../service"
 import { tg_token } from "../../constant"
-
+import Loading from "../../components/gameplay/loadingAnimation"
 const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [sidebarNumber, setSidebarNumber] = useState<number>(0)
     const [user, setUser] = useState<string | undefined>("")
@@ -12,7 +12,8 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [freetokenBalance, setFreeTokenBalance] = useState<number>(0)
     const [todayClaimAmount, setTodayClaimAmount] = useState<number>(0)
     const [isDailyClaimed, setIsDailyClaimed] = useState<boolean>(false)
-
+    const [avatarUrl, setAvatarUrl] = useState<string | undefined>("")
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const getProfileAvatar = async (userId: any, bot_token: any) => {
         const profilesResponse = await fetch(`https://api.telegram.org/bot${bot_token}/getUserProfilePhotos?user_id=${userId}`);
         const profiles = await profilesResponse.json();
@@ -28,15 +29,6 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const getTelegramUserName = async () => {
         const webapp = window.Telegram?.WebApp.initDataUnsafe;
-        // const bot_token = tg_token
-
-        // console.log("not TG =>")
-        // const _userId = 719328
-        // const IsnewUser = await UserAPI.post("/setuser", { user: "goldhorse", tgUserId: _userId, realName: "Gold horse" })
-        // console.log(IsnewUser)
-        // await setUser("goldhorse")
-        // await setTgUserId(_userId)
-
 
         // Get the inviter's ID from the link
         const urlParams = new URLSearchParams(window.location.search);
@@ -57,7 +49,8 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
             await setUser(userName)
             await setTgUserId(userId)
             await setrealName(realName)
-            console.log("Authentication!")
+            await setAvatarUrl(avatarUrl)
+            await setIsLoading(true)
         } else {
 
         }
@@ -105,7 +98,8 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsDailyClaimed: setIsDailyClaimed,
         setTgUserId: setTgUserId,
         tgUserId: tgUserId,
-        realName: realName
+        realName: realName,
+        avatarUrl: avatarUrl
     }), [
         sidebarNumber,
         setSidebarNumber,
@@ -121,7 +115,8 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsDailyClaimed,
         tgUserId,
         setTgUserId,
-        realName
+        realName,
+        avatarUrl
     ])
 
     useEffect(() => {
@@ -130,7 +125,7 @@ const UtilContextProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     return (
         <UtilContext.Provider value={value}>
-            {children}
+            {isLoading ? children : <Loading />}
         </UtilContext.Provider>
     )
 }

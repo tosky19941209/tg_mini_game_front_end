@@ -1,13 +1,12 @@
 import FollowUp from "../../../assets/followup.svg"
 import FollowDown from "../../../assets/followdown.svg"
-import Avatar from "../../../assets/avatar.jpg"
 import { useEffect } from "react"
 import { useUtilContext } from "../../../hooks"
 interface PropsGameplayHeader {
     isStart: boolean
 }
 const GameplayHeader = ({ isStart }: PropsGameplayHeader) => {
-    const { realName } = useUtilContext()
+    const { realName, avatarUrl } = useUtilContext()
     useEffect(() => {
 
     }, [isStart])
@@ -16,7 +15,7 @@ const GameplayHeader = ({ isStart }: PropsGameplayHeader) => {
             <div className="w-full h-[100%] ml-4 flex items-center">
                 <img
                     className="rounded-[50%] w-[59px] h-[59px] bg-red-100  "
-                    src={Avatar}
+                    src={avatarUrl}
                     alt="avatar"
                 />
                 <div className="flex ml-3 flex-col justify-center">
