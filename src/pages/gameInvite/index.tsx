@@ -90,7 +90,10 @@ const GameInvite = () => {
                                 balance={itx.balance}
                                 key={idx}
                             />
-                        )) : <Loading />
+                        )) :
+                        <div className="h-[70px] ml-5 mr-5 flex justify-between items-center pr-3 pl-3">
+                            <Loading />
+                        </div>
                 }
             </div>
 
