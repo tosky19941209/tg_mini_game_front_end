@@ -7,7 +7,6 @@ import { tg_inviteName } from "../../constant"
 import { useEffect, useState } from "react"
 import { FriendsAPI } from "../../service"
 import CoinImg from "../../assets/coin-y.svg"
-import Loading from "../../components/gameplay/loadingAnimation"
 const FriendListComponent = (props: any) => {
     return (
         <div className="h-[70px] ml-5 mr-5 flex justify-between items-center pr-3 pl-3">
@@ -91,8 +90,8 @@ const GameInvite = () => {
                                 key={idx}
                             />
                         )) :
-                        <div className="h-[70px] ml-5 mr-5 flex justify-between items-center pr-3 pl-3">
-                            <Loading />
+                        <div className="flex justify-center items-center">
+                            Loading...
                         </div>
                 }
             </div>
