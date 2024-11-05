@@ -7,6 +7,7 @@ import { tg_inviteName } from "../../constant"
 import { useEffect, useState } from "react"
 import { FriendsAPI } from "../../service"
 import CoinImg from "../../assets/coin-y.svg"
+import Loading from "../../components/gameplay/loadingAnimation"
 const FriendListComponent = (props: any) => {
     return (
         <div className="h-[70px] ml-5 mr-5 flex justify-between items-center pr-3 pl-3">
@@ -40,6 +41,7 @@ const FriendListComponent = (props: any) => {
 const GameInvite = () => {
     const { freetokenBalance, tgUserId } = useUtilContext()
     const [friendList, setFriendList] = useState<any>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const utils = initUtils();
     const generateInviteLink = () => {
         const tmpURL = `https://t.me/${tg_inviteName}?start=${tgUserId}`;
@@ -58,7 +60,8 @@ const GameInvite = () => {
             const _friendList = await FriendsAPI.post('/getFriendlist', { tgUserId: tgUserId })
             const friendList = _friendList.data.message
             console.log(friendList)
-            setFriendList(friendList)
+            await setFriendList(friendList)
+            await setIsLoading(true)
         }
 
         getFriendlist()
@@ -79,14 +82,15 @@ const GameInvite = () => {
                     Invite a friend and you’ll both get 25 points.
                 </p> */}
                 {
-                    friendList.map((itx: any, idx: number) => (
-                        <FriendListComponent
-                            avatarUrl={itx.avatarUrl}
-                            realName={itx.realName}
-                            balance={itx.balance}
-                            key={idx}
-                        />
-                    ))
+                    isLoading ?
+                        friendList.map((itx: any, idx: number) => (
+                            <FriendListComponent
+                                avatarUrl={itx.avatarUrl}
+                                realName={itx.realName}
+                                balance={itx.balance}
+                                key={idx}
+                            />
+                        )) : <Loading />
                 }
             </div>
 
